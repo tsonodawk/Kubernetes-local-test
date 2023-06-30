@@ -1,0 +1,19 @@
+apiVersion: apps/v1  # Deploymentの場合は「apps/v1」固定
+kind: Deployment  # Deploymentを指定
+metadata:
+  name: nginx-deploy  # Deploymentの名前(任意の名前を付与)を指定
+spec:  # ReplicaSetの定義
+  replicas: 3  # Podの数を指定
+  selector:
+    matchLabels:
+      app: nginx
+  template:  # 作成するPodの情報
+    metadata:
+      labels:
+        app: nginx  # 生成するPodの名前(任意の名前を付与)を指定
+    spec:
+      containers:  # 本セクションにコンテナイメージを記述
+      - image: nginx:latest
+        name: nginx
+        ports:
+        - containerPort: 80
